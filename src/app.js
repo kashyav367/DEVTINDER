@@ -18,31 +18,99 @@ const app = express()
 //     res.send("kaise ho")
 // })
 
+// app.get("/a/" , (req,res) => {
+//     res.send({firstName: "Ankit", lastName: "Singh"})
+// })
+// app.get("/.*fly$/" , (req,res) => {
+//     res.send({firstName: "Ankit", lastName: "Singh"})
+// })
 
-app.get("/users" ,  (req,res) => {
-    res.send({firstname :"ankit", lastname: "singh"})
+
+// app.get("/abc" , (req,res) => {
+//     res.send({firstName: "Ankit", lastName: "Singh"})
+// })
+
+
+// app.get("/user" ,  (req,res) => {
+//     console.log(req.query)
+//     res.send({firstname :"ankit", lastname: "singh"})
+// })
+
+// app.get("/user/:userId/:name/:password" ,  (req,res) => {
+//     console.log(req.params)
+//     res.send({firstname :"ankit", lastname: "singh"})
+// })
+
+// // app.post("/users" ,  (req,res) => {
+// //     res.send("save this data into database")
+// // })
+
+// // app.delete("/users" ,  (req,res) => {
+// //     res.send("deleted successfully")
+// // })
+
+
+// // app.put("/users", (req,res) => {
+// //     res.send("updated whole data")
+// // })
+
+// // app.patch("/users" , (req,res) => {
+// //     res.send("update specific data")
+// // })
+
+// app.use("/test" , (req,res) => {
+//     res.send("hello ji")
+// })
+
+
+
+// app.get("/users", 
+//     (req,res,next) => {
+//    console.log("Handling to route 1") 
+// //    res.send("Response !!")
+//    next()
+//     // res.send("Response !!")
+// },
+// (req,res,next) => {
+//   console.log("handing to route 2")
+// //   res.send("Response 2")
+//   next()
+// },
+// [
+// (req,res,next) => {
+//     console.log("handler route 3")
+//     // res.send("response 3")
+//     next()
+// },
+// (req,res,next) => {
+//     console.log("handler route 4")
+//     // res.send("response 4")
+//     // next()
+// },
+// ],
+
+// (req,res,next) => {
+//     console.log("handler route 4")
+//     res.send("response 5")
+//     next()
+// },
+
+app.use("/users", (req,res,next) => {
+    console.log("ypp") // middleware
+     res.send("i am first")
+})
+//separte route handler
+app.get("/users", (req,res,next) => {
+   console.log("response 1")
+   // res.send("request handler")
+   next()
 })
 
-app.post("/users" ,  (req,res) => {
-    res.send("save this data into database")
+app.get("/users", (req,res,next) => {
+   console.log("response 1")
+   res.send("request handler")
 })
 
-app.delete("/users" ,  (req,res) => {
-    res.send("deleted successfully")
-})
-
-
-app.put("/users", (req,res) => {
-    res.send("updated whole data")
-})
-
-app.patch("/users" , (req,res) => {
-    res.send("update specific data")
-})
-
-app.use("/test" , (req,res) => {
-    res.send("hello ji")
-})
 
 app.listen(7777, () => {
  console.log('Server is running at port 7777....')
