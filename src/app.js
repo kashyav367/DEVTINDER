@@ -95,22 +95,41 @@ const app = express()
 //     next()
 // },
 
-app.use("/users", (req,res,next) => {
-    console.log("ypp") // middleware
-     res.send("i am first")
-})
-//separte route handler
-app.get("/users", (req,res,next) => {
-   console.log("response 1")
-   // res.send("request handler")
-   next()
+// app.use("/users", (req,res,next) => {
+//     console.log("ypp") // middleware
+//      res.send("i am first")
+// })
+// //separte route handler
+// app.get("/users", (req,res,next) => {
+//    console.log("response 1")
+//    // res.send("request handler")
+//    next()
+// })
+
+// app.get("/users", (req,res,next) => {
+//    console.log("response 1")
+//    res.send("request handler")
+// })
+
+const {adminAuth, userAuth} = require("./middlewares/auth")
+
+app.use("/admin",  adminAuth)
+
+app.get("/admin/getAllData" , (req,res) => {
+    res.send("get all data ")
 })
 
-app.get("/users", (req,res,next) => {
-   console.log("response 1")
-   res.send("request handler")
+app.get("/admin/deleteAllData", (req,res) => {
+    res.send("delete all data")
 })
 
+app.get("/user", userAuth, (req,res) => {
+    res.send("user enter")
+}) 
+
+app.get("/user/data",userAuth, (req,res) => {
+    res.send("get my data boss")
+})
 
 app.listen(7777, () => {
  console.log('Server is running at port 7777....')
