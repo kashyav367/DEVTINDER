@@ -111,24 +111,43 @@ const app = express()
 //    res.send("request handler")
 // })
 
-const {adminAuth, userAuth} = require("./middlewares/auth")
+// const {adminAuth, userAuth} = require("./middlewares/auth")
 
-app.use("/admin",  adminAuth)
+// app.use("/admin",  adminAuth)
 
-app.get("/admin/getAllData" , (req,res) => {
-    res.send("get all data ")
+// app.get("/admin/getAllData" , (req,res) => {
+//     res.send("get all data ")
+// })
+
+// app.get("/admin/deleteAllData", (req,res) => {
+//     res.send("delete all data")
+// })
+
+// app.get("/user", userAuth, (req,res) => {
+//     res.send("user enter")
+// }) 
+
+// app.get("/user/data",userAuth, (req,res) => {
+//     res.send("get my data boss")
+// })
+
+app.use("/" , (err,req,res,next) => {
+    res.status(500).send("Something went wrong")
 })
 
-app.get("/admin/deleteAllData", (req,res) => {
-    res.send("delete all data")
+
+app.get("/user" , (req,res) => {
+    // try{
+    throw new Error("hhhiuhui")
+    res.send("hello")
+    // }
+    // catch(err){
+    //     res.status(500).send("some error context support team")
+    // }
 })
 
-app.get("/user", userAuth, (req,res) => {
-    res.send("user enter")
-}) 
-
-app.get("/user/data",userAuth, (req,res) => {
-    res.send("get my data boss")
+app.use("/" , (err,req,res,next) => {
+    res.status(500).send("Something went wrong")
 })
 
 app.listen(7777, () => {
